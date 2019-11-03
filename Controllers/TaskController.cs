@@ -43,7 +43,7 @@ namespace ToDo.Controllers
         public ActionResult<TaskViewModel> GetTask(int id)
         {
             var result = taskService.GetTask(id);
-            return result != null ? (ActionResult)Ok(mapper.Map<TaskViewModel>(result)) : NoContent();
+            return result != null ? (ActionResult)Ok(mapper.Map<TaskViewModel>(result)) : (ActionResult)NoContent();
         }
 
         [HttpPost("post")]

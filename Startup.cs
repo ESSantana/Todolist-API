@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using ToDo.Mappers;
 using ToDo.Repository;
 using ToDo.Services;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace ToDo
 {
@@ -27,9 +28,7 @@ namespace ToDo
         {
             services.AddControllers();
 
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<TodoContext>(options => options.UseNpgsql($"Server=127.0.0.1;Port=5432;username=postgres;password=pass;database=todolist"))
-                .BuildServiceProvider();
+            services.AddDbContext<TodoContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddAutoMapper( new Assembly[] {typeof(AutoMapperProfile).GetTypeInfo().Assembly});
 

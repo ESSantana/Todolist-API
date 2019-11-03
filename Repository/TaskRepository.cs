@@ -53,6 +53,7 @@ namespace ToDo.Repository
                 newTask.Done = task.Done;
 
                 _dbContext.Update(newTask);
+                _dbContext.SaveChanges();
                 return newTask;
             }
             return null;
@@ -63,6 +64,7 @@ namespace ToDo.Repository
             if(task != null)
             {
                 _dbContext.Remove(task); 
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;

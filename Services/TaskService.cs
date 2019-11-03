@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ToDo.Entities;
+using ToDo.Exception;
 using ToDo.Repository;
 
 namespace ToDo.Services
@@ -29,7 +30,7 @@ namespace ToDo.Services
 
             if (result == null)
             {
-                throw new System.Exception("No Task registered!");
+                throw new ContentException("No Task registered!");
             }
 
             return result;
@@ -41,7 +42,7 @@ namespace ToDo.Services
 
             if (result == null)
             {
-                throw new System.Exception("Any Task found!");
+                throw new ContentException("Any Task found!");
             }
 
             return result;
@@ -54,7 +55,7 @@ namespace ToDo.Services
                 && !string.IsNullOrEmpty(task.Priority))
             {
                 if(taskRepository.Post(task) == null)
-                    throw new System.Exception("Internal Error: Cannot save data!");
+                    throw new ContentException("Internal Error: Cannot save data!");
             }
             return true;
         }
@@ -66,7 +67,7 @@ namespace ToDo.Services
                 && !string.IsNullOrEmpty(task.Priority))
                 {
                     if(taskRepository.Update(task) == null)
-                        throw new System.Exception("Cannot find register id!");
+                        throw new ContentException("Cannot find register id!");
                 }
             return true;
         }
